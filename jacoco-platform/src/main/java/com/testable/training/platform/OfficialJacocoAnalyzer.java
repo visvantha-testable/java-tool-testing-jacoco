@@ -35,7 +35,9 @@ public final class OfficialJacocoAnalyzer {
         Analyzer analyzer = new Analyzer(loader.getExecutionDataStore(), builder);
         analyzer.analyzeAll(classesDirectory.toFile());
 
-        IBundleCoverage bundle = builder.getBundle("sample_subject");
+        IBundleCoverage bundle = builder.getBundles().isEmpty()
+                ? builder.getBundle(classesDirectory.getFileName().toString())
+                : builder.getBundles().iterator().next();
         JacocoCounters counters = fromBundle(bundle);
         if (!loader.getSessionInfoStore().getInfos().isEmpty()) {
             counters.sessionId = loader.getSessionInfoStore().getInfos().get(0).getId();
