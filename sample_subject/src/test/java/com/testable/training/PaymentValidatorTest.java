@@ -26,6 +26,6 @@ class PaymentValidatorTest {
 
     @Test
     void maskLongToken() {
-        assertEquals("ab****yz", validator.maskToken("abyz"));
+        assertEquals("ab****yz", validator.maskToken("abcdefyz"));
     }
 }

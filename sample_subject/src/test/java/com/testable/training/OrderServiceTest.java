@@ -66,6 +66,6 @@ class OrderServiceTest {
 
     @Test
     void crossModuleFlow() {
-        assertEquals("ab****yz", service.crossModuleFlow("abyz"));
+        assertEquals("ab****yz", service.crossModuleFlow("abcdefyz"));
     }
 }
