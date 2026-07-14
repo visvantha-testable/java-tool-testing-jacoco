@@ -244,8 +244,8 @@
     {
       "l3_strategy": "Control Flow Testing",
       "l4_classification": "Path Coverage",
-      "l5_metric": "Path Coverage %",
-      "normalized_score_key": "Path Coverage %",
+      "l5_metric": "Path Detection Testing",
+      "normalized_score_key": "Path Detection Testing",
       "score_field": "path_coverage_percent_score",
       "jacoco_native": true,
       "required_artifacts": [

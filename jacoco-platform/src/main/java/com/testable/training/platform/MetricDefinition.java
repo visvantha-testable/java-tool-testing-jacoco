@@ -17,7 +17,7 @@ public record MetricDefinition(
             new MetricDefinition("Control Flow Testing", "Path Coverage", "Exception Path Handling", "Exception Path Handling", "exception_path_handling_score"),
             new MetricDefinition("Control Flow Testing", "Path Coverage", "Multi-Function Path Tracking", "Multi-Function Path Tracking", "multi_function_path_tracking_score"),
             new MetricDefinition("Control Flow Testing", "Path Coverage", "CI/CD Integration Test", "CI/CD Integration Test", "cicd_integration_test_score"),
-            new MetricDefinition("Control Flow Testing", "Path Coverage", "Path Coverage %", "Path Coverage %", "path_coverage_percent_score"),
+            new MetricDefinition("Control Flow Testing", "Path Coverage", "Path Detection Testing", "Path Detection Testing", "path_coverage_percent_score"),
             new MetricDefinition("Test Regression/Coverage Analysis", "Coverage Delta", "Regression Testing Monitoring", "Regression Testing Monitoring", "regression_testing_monitoring_score"),
             new MetricDefinition("Test Regression/Coverage Analysis", "Coverage Delta", "Test Suite Effectiveness Tracking", "Test Suite Effectiveness Tracking", "test_suite_effectiveness_tracking_score"),
             new MetricDefinition("Test Regression/Coverage Analysis", "Coverage Delta", "CI/CD Quality Gate Enforcement", "CI/CD Quality Gate Enforcement", "cicd_quality_gate_enforcement_score"),

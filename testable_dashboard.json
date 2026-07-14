@@ -296,7 +296,7 @@
     },
     {
       "classification": "Path Coverage",
-      "l5_metric": "Path Coverage %",
+      "l5_metric": "Path Detection Testing",
       "covered": "yes",
       "score": 100,
       "value": "100/100",

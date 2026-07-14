@@ -14,7 +14,7 @@
     "Exception Path Handling": 100.0,
     "Multi-Function Path Tracking": 100.0,
     "CI/CD Integration Test": 100.0,
-    "Path Coverage %": 100.0,
+    "Path Detection Testing": 100.0,
     "Regression Testing Monitoring": 100.0,
     "Test Suite Effectiveness Tracking": 100.0,
     "CI/CD Quality Gate Enforcement": 100.0,
@@ -105,7 +105,7 @@
     },
     {
       "classification": "Path Coverage",
-      "l5_metric": "Path Coverage %",
+      "l5_metric": "Path Detection Testing",
       "score": 100,
       "result": "PASS",
       "coverage_complete": true

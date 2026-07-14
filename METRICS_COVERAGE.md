@@ -11,7 +11,7 @@
 | 7 | Control Flow Testing | Path Coverage | Exception Path Handling | 100 |
 | 8 | Control Flow Testing | Path Coverage | Multi-Function Path Tracking | 100 |
 | 9 | Control Flow Testing | Path Coverage | CI/CD Integration Test | 100 |
-| 10 | Control Flow Testing | Path Coverage | Path Coverage % | 100 |
+| 10 | Control Flow Testing | Path Coverage | Path Detection Testing | 100 |
 | 11 | Test Regression/Coverage Analysis | Coverage Delta | Regression Testing Monitoring | 100 |
 | 12 | Test Regression/Coverage Analysis | Coverage Delta | Test Suite Effectiveness Tracking | 100 |
 | 13 | Test Regression/Coverage Analysis | Coverage Delta | CI/CD Quality Gate Enforcement | 100 |

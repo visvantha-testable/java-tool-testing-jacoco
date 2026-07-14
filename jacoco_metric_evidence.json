@@ -13,7 +13,7 @@
     "Exception Path Handling": 100.0,
     "Multi-Function Path Tracking": 100.0,
     "CI/CD Integration Test": 100.0,
-    "Path Coverage %": 100.0,
+    "Path Detection Testing": 100.0,
     "Regression Testing Monitoring": 100.0,
     "Test Suite Effectiveness Tracking": 100.0,
     "CI/CD Quality Gate Enforcement": 100.0,
@@ -294,7 +294,7 @@
     {
       "l3_strategy": "Control Flow Testing",
       "classification": "Path Coverage",
-      "l5_metric": "Path Coverage %",
+      "l5_metric": "Path Detection Testing",
       "score": 100.0,
       "covered": true,
       "jacoco_native": true,
