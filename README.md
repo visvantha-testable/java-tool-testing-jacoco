@@ -58,10 +58,14 @@ config/                  # metric_coverage.json, platform_trigger.json
 
 ## Tool stack
 
-- **JaCoCo** — LINE, BRANCH, INSTRUCTION counters from `jacoco.xml`
+- **Official JaCoCo** — [github.com/jacoco/jacoco](https://github.com/jacoco/jacoco) release **0.8.15**
+- **org.jacoco.core** — official Core API (`ExecFileLoader`, `Analyzer`, `CoverageBuilder`)
+- **jacoco-maven-plugin** — LINE, BRANCH, INSTRUCTION counters from `jacoco.exec` + `jacoco.xml`
 - **Static DU (Java)** — definition-use mapping for All-Defs / All-Uses metrics
 - **Baseline delta** — Coverage Delta via `baseline_jacoco.xml`
 - **Churn config** — Code Churn regression focus mapping
+
+See [vendor/jacoco/OFFICIAL_SOURCE.md](vendor/jacoco/OFFICIAL_SOURCE.md) for official source linkage.
 
 ## Output files
 

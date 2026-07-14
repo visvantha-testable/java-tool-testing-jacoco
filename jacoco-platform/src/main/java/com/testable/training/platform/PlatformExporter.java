@@ -24,7 +24,7 @@ public final class PlatformExporter {
             throw new IllegalStateException("Missing " + jacocoXml + "; run artifact collection first");
         }
 
-        JacocoCounters current = JacocoXmlParser.parse(jacocoXml);
+        JacocoCounters current = JacocoCoverageLoader.load(jacocoXml, repoRoot);
         Path baselinePath = Files.exists(baselineXml)
                 ? baselineXml
                 : repoRoot.resolve("config/golden_baseline_jacoco.xml");
@@ -117,6 +117,12 @@ public final class PlatformExporter {
 
         Map<String, Object> supplemental = new LinkedHashMap<>();
         supplemental.put("jacoco_xml", jacocoXml.toString());
+        Path execFile = repoRoot.resolve("sample_subject/target/jacoco.exec");
+        if (Files.exists(execFile)) {
+            supplemental.put("jacoco_exec", execFile.toString());
+        }
+        supplemental.put("official_jacoco_source", "https://github.com/jacoco/jacoco");
+        supplemental.put("official_jacoco_version", "0.8.15");
         if (Files.exists(baselineXml)) {
             supplemental.put("baseline_jacoco_xml", baselineXml.toString());
         }

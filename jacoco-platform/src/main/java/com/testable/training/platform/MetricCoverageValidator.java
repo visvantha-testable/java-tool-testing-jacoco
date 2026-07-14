@@ -29,7 +29,7 @@ public final class MetricCoverageValidator {
                 normalized.forEach((k, v) -> scores.put(k, ((Number) v).doubleValue()));
             }
         } else {
-            JacocoCounters current = JacocoXmlParser.parse(jacocoXml);
+            JacocoCounters current = JacocoCoverageLoader.load(jacocoXml, repoRoot);
             JacocoCounters baseline = JacocoXmlParser.parse(repoRoot.resolve("config/golden_baseline_jacoco.xml"));
             StaticDuAnalyzer.StaticDuSummary du = StaticDuAnalyzer.analyze(
                     repoRoot.resolve("sample_subject/src/main/java"),

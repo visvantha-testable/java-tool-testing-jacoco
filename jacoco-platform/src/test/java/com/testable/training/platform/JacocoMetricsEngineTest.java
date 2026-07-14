@@ -27,7 +27,7 @@ class JacocoMetricsEngineTest {
         Path training = repoRoot.resolve("artifacts/training");
         ArtifactCollector.collect(repoRoot, training);
 
-        JacocoCounters current = JacocoXmlParser.parse(training.resolve("jacoco.xml"));
+        JacocoCounters current = JacocoCoverageLoader.load(training.resolve("jacoco.xml"), repoRoot);
         JacocoCounters baseline = JacocoXmlParser.parse(training.resolve("baseline_jacoco.xml"));
         StaticDuAnalyzer.StaticDuSummary du = StaticDuAnalyzer.analyze(
                 repoRoot.resolve("sample_subject/src/main/java"),

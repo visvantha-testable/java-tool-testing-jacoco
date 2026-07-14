@@ -17,13 +17,17 @@ public final class ArtifactCollector {
         Path sampleSubject = repoRoot.resolve("sample_subject");
         Path mavenReport = sampleSubject.resolve("target/site/jacoco/jacoco.xml");
         Path jacocoXml = outputDir.resolve("jacoco.xml");
+        Path execFile = sampleSubject.resolve("target/jacoco.exec");
 
         if (runMaven(sampleSubject)) {
             if (!Files.exists(mavenReport)) {
                 throw new IllegalStateException("Missing Maven JaCoCo report: " + mavenReport);
             }
             Files.copy(mavenReport, jacocoXml, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("Using Maven + JaCoCo to collect artifacts");
+            if (Files.exists(execFile)) {
+                Files.copy(execFile, outputDir.resolve("jacoco.exec"), StandardCopyOption.REPLACE_EXISTING);
+            }
+            System.out.println("Using official JaCoCo Maven plugin output (exec + jacoco.xml)");
         } else {
             System.out.println("Maven unavailable — synthesizing golden JaCoCo XML from Java sources");
             JacocoXmlSynthesizer.synthesize(repoRoot, jacocoXml, false);
