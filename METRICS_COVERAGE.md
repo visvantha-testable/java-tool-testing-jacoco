@@ -37,5 +37,5 @@
 | 33 | Development Process Analysis | Code Churn | Regression Testing Focus | 100 |
 
 **Tool:** JaCoCo  
-**Trigger:** `python jacoco_trigger.py`  
+**Trigger:** `mvn -q -pl jacoco-platform exec:java -Dexec.mainClass=com.testable.training.platform.JacocoTrigger`  
 **Output:** `jacoco.json`
