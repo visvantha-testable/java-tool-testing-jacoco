@@ -5,8 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Resolves JaCoCo coverage counters using official org.jacoco.core when possible,
- * falling back to jacoco.xml parsing for synthesized training artifacts.
+ * Resolves JaCoCo coverage counters. Primary source is the official Maven
+ * {@code jacoco.xml} report; {@code jacoco.exec} is retained as supplemental
+ * evidence from the official JaCoCo runtime.
  */
 public final class JacocoCoverageLoader {
 
@@ -14,18 +15,14 @@ public final class JacocoCoverageLoader {
     }
 
     public static JacocoCounters load(Path jacocoXml, Path repoRoot) throws Exception {
+        if (Files.exists(jacocoXml)) {
+            return JacocoXmlParser.parse(jacocoXml);
+        }
         Path execFile = repoRoot.resolve("sample_subject/target/jacoco.exec");
         Path classesDir = repoRoot.resolve("sample_subject/target/classes");
         if (Files.exists(execFile) && Files.isDirectory(classesDir)) {
-            try {
-                JacocoCounters official = OfficialJacocoAnalyzer.fromExec(execFile, classesDir);
-                if (official.lineCovered + official.lineMissed > 0) {
-                    return official;
-                }
-            } catch (IOException ignored) {
-                // fall back to XML below
-            }
+            return OfficialJacocoAnalyzer.fromExec(execFile, classesDir);
         }
-        return JacocoXmlParser.parse(jacocoXml);
+        throw new IOException("Missing JaCoCo artifacts: " + jacocoXml);
     }
 }
