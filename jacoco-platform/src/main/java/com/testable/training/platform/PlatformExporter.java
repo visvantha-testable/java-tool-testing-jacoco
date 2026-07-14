@@ -43,7 +43,7 @@ public final class PlatformExporter {
         }
 
         JacocoDashboardMetrics metrics = JacocoDashboardMetrics.compute(current, baseline, du, churnModules, churnTested);
-        Map<String, Object> unified = buildUnified(metrics, jacocoXml, baselineXml, staticDu);
+        Map<String, Object> unified = buildUnified(metrics, jacocoXml, baselineXml, staticDu, repoRoot);
         unified = PlatformFixup.apply(unified, metrics);
         List<String> errors = PlatformFixup.verify(unified);
         if (!errors.isEmpty()) {
