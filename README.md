@@ -1,6 +1,6 @@
-# JaCoCo Training Repository — 33 Metrics at 100/100
+# JaCoCo Training Repository — 33 Metrics at 100/100 (Java)
 
-Single reference repository for **JaCoCo** code coverage training and Testable dashboard certification.
+Single **Java/Maven** reference repository for **JaCoCo** code coverage training and Testable dashboard certification.
 
 **Repository:** https://github.com/visvantha-testable/java-tool-testing-jacoco
 
@@ -19,10 +19,18 @@ All 33 metrics score **100/100** with `covered: yes`.
 
 ## Platform trigger (required)
 
-**Do not run raw JaCoCo/Maven alone on the platform.** Use the wrapper:
+**Do not run raw JaCoCo/Maven alone on the platform.** Use the Java wrapper:
 
 ```bash
-python jacoco_trigger.py
+mvn -q -pl jacoco-platform exec:java -Dexec.mainClass=com.testable.training.platform.JacocoTrigger
+```
+
+Or use the helper script:
+
+```bash
+./run_trigger.sh        # Linux/macOS
+.\run_trigger.ps1       # Windows
+run_trigger.bat         # Windows CMD
 ```
 
 This produces `jacoco.json` at the repository root — the unified output Testable expects.
@@ -30,43 +38,30 @@ This produces `jacoco.json` at the repository root — the unified output Testab
 ## Local verification
 
 ```bash
-pip install -r requirements.txt
-pip install -e .
-python jacoco_trigger.py
-pytest -q
+mvn clean test
+mvn -q -pl jacoco-platform exec:java -Dexec.mainClass=com.testable.training.platform.JacocoTrigger
 ```
+
+Requires **Java 17+** and **Maven 3.9+**.
 
 ## Structure
 
 ```
-sample_subject/          # Maven Java project (JaCoCo 0.8.12, 100% thresholds)
-  src/main/java/         # OrderService, PaymentValidator, DataFlowSample
-  src/test/java/         # JUnit 5 tests (21 tests, full branch/line coverage)
+pom.xml                  # Maven parent (100% Java project)
+sample_subject/          # JaCoCo training subject + JUnit 5 tests
+jacoco-platform/         # Java platform trigger + 33-metric engine
+  src/main/java/com/testable/training/platform/
 artifacts/training/      # jacoco.xml, baseline, static DU, churn evidence
-jacoco_trigger.py        # Platform entry point
-jacoco_metrics.py        # 33-metric derivation engine
-static_du_analysis.py    # Static def-use analysis (All-Defs / All-Uses)
-scripts/                 # collect, export, verify, synthesize
 config/                  # metric_coverage.json, platform_trigger.json
+.github/workflows/ci.yml # Build + trigger + verify on push
 ```
 
-## Tool stack (per metric specification)
+## Tool stack
 
 - **JaCoCo** — LINE, BRANCH, INSTRUCTION counters from `jacoco.xml`
-- **Static DU** — definition-use mapping for All-Defs / All-Uses metrics
-- **Git baseline + diff** — Coverage Delta via `baseline_jacoco.xml`
+- **Static DU (Java)** — definition-use mapping for All-Defs / All-Uses metrics
+- **Baseline delta** — Coverage Delta via `baseline_jacoco.xml`
 - **Churn config** — Code Churn regression focus mapping
-
-## Maven (optional)
-
-If Java 17 + Maven are installed:
-
-```bash
-cd sample_subject
-mvn clean test jacoco:report
-```
-
-Without Maven, `collect_artifacts.py` synthesizes golden `jacoco.xml` from Java sources.
 
 ## Output files
 

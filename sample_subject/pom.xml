@@ -4,9 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.testable.training</groupId>
+    <parent>
+        <groupId>com.testable.training</groupId>
+        <artifactId>java-tool-testing-jacoco</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
     <artifactId>jacoco-sample-subject</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>JaCoCo Training Subject</name>
 

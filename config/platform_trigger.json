@@ -1,8 +1,9 @@
 {
   "platform": "Testable",
   "tool": "JaCoCo",
-  "trigger_command": "python jacoco_trigger.py",
-  "trigger_command_alt": "python -m jacoco_platform",
+  "language": "Java",
+  "trigger_command": "mvn -q -pl jacoco-platform exec:java -Dexec.mainClass=com.testable.training.platform.JacocoTrigger",
+  "trigger_command_alt": "./run_trigger.sh",
   "do_not_run_jacoco_alone": true,
   "primary_output_file": "jacoco.json",
   "target_repository": "sample_subject",
