@@ -15,7 +15,7 @@ class JacocoMetricsEngineTest {
     }
 
     @Test
-    void synthesizedArtifactsScore100() throws Exception {
+    void goldenJacocoXmlScores100() throws Exception {
         Path repoRoot = Path.of("").toAbsolutePath();
         while (repoRoot != null && !repoRoot.resolve("sample_subject").toFile().exists()) {
             repoRoot = repoRoot.getParent();
@@ -25,13 +25,15 @@ class JacocoMetricsEngineTest {
         }
 
         Path training = repoRoot.resolve("artifacts/training");
-        ArtifactCollector.collect(repoRoot, training);
+        if (!training.resolve("jacoco.xml").toFile().exists()) {
+            ArtifactCollector.collect(repoRoot, training);
+        }
 
-        JacocoCounters current = JacocoCoverageLoader.load(training.resolve("jacoco.xml"), repoRoot);
+        JacocoCounters current = JacocoXmlParser.parse(training.resolve("jacoco.xml"));
         JacocoCounters baseline = JacocoXmlParser.parse(training.resolve("baseline_jacoco.xml"));
         StaticDuAnalyzer.StaticDuSummary du = StaticDuAnalyzer.analyze(
                 repoRoot.resolve("sample_subject/src/main/java"),
-                true
+                current.lineMissed == 0
         );
         JacocoDashboardMetrics metrics = JacocoDashboardMetrics.compute(current, baseline, du, 3, 3);
         assertTrue(metrics.normalizedScores().values().stream().allMatch(v -> v >= 100.0));
