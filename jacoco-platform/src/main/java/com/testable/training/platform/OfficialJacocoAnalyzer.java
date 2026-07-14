@@ -4,7 +4,7 @@ import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IBundleCoverage;
 import org.jacoco.core.analysis.ICounter;
-import org.jacoco.core.analysis.ILine;
+import org.jacoco.core.analysis.ISourceNode;
 import org.jacoco.core.tools.ExecFileLoader;
 
 import java.io.IOException;
@@ -54,10 +54,10 @@ public final class OfficialJacocoAnalyzer {
             for (int line = clazz.getFirstLine(); line <= clazz.getLastLine(); line++) {
                 ILine lineInfo = clazz.getLine(line);
                 int status = lineInfo.getStatus();
-                if (status == ILine.EMPTY) {
+                if ((status & ISourceNode.EMPTY) != 0) {
                     continue;
                 }
-                if (status == ILine.NOT_COVERED) {
+                if (status == ISourceNode.NOT_COVERED) {
                     counters.ghostLines++;
                 }
                 ICounter branch = lineInfo.getBranchCounter();

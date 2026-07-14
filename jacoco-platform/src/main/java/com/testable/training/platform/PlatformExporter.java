@@ -89,7 +89,8 @@ public final class PlatformExporter {
             JacocoDashboardMetrics metrics,
             Path jacocoXml,
             Path baselineXml,
-            Path staticDu
+            Path staticDu,
+            Path repoRoot
     ) throws Exception {
         Map<String, Double> scores = metrics.normalizedScores();
         List<Map<String, Object>> metricRows = new ArrayList<>();
