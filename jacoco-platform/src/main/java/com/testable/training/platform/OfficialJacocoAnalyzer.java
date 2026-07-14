@@ -35,13 +35,25 @@ public final class OfficialJacocoAnalyzer {
         Analyzer analyzer = new Analyzer(loader.getExecutionDataStore(), builder);
         analyzer.analyzeAll(classesDirectory.toFile());
 
-        IBundleCoverage bundle = builder.getBundles().isEmpty()
-                ? builder.getBundle(classesDirectory.getFileName().toString())
-                : builder.getBundles().iterator().next();
-        JacocoCounters counters = fromBundle(bundle);
+        JacocoCounters counters = fromClasses(builder);
         if (!loader.getSessionInfoStore().getInfos().isEmpty()) {
             counters.sessionId = loader.getSessionInfoStore().getInfos().get(0).getId();
         }
+        return counters;
+    }
+
+    public static JacocoCounters fromClasses(CoverageBuilder builder) {
+        JacocoCounters counters = new JacocoCounters();
+        builder.getClasses().forEach(clazz -> {
+            counters.lineMissed += clazz.getLineCounter().getMissedCount();
+            counters.lineCovered += clazz.getLineCounter().getCoveredCount();
+            counters.branchMissed += clazz.getBranchCounter().getMissedCount();
+            counters.branchCovered += clazz.getBranchCounter().getCoveredCount();
+            counters.instructionMissed += clazz.getInstructionCounter().getMissedCount();
+            counters.instructionCovered += clazz.getInstructionCounter().getCoveredCount();
+        });
+        counters.ghostLines = counters.lineMissed;
+        counters.partialBranchLines = 0;
         return counters;
     }
 
