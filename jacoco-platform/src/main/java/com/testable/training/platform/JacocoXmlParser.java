@@ -14,9 +14,13 @@ public final class JacocoXmlParser {
     }
 
     public static JacocoCounters parse(Path path) throws Exception {
-        Document doc = DocumentBuilderFactory.newInstance()
-                .newDocumentBuilder()
-                .parse(path.toFile());
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        factory.setValidating(false);
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().parse(path.toFile());
         Element root = doc.getDocumentElement();
         JacocoCounters counters = new JacocoCounters();
 
